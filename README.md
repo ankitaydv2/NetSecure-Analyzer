@@ -138,48 +138,26 @@ Investigate packet loss, congestion, or network path issues.
                        ▼
                  Final Report
 
-
-###  Packet Analysis Pipeline 
-
-PCAP / PCAPNG
-      │
-      ▼
-Read Packets
-      │
-      ▼
-Identify Protocol Layers
-      │
-      ├───────────────┐
-      ▼               ▼
- TCP Analysis     UDP Analysis
-      │
-      ▼
-TCP Flags & Events
-      │
-      ▼
-Possible Retransmissions
-      │
-      ▼
-TLS Handshake Analysis
-      │
-      ▼
-Generate Statistics
-      │
-      ▼
-Rule-Based Diagnosis
-      │
-      ▼
-Final Analysis Report
-
-The core idea is: Packet → Protocol Event → Network Meaning → Possible Diagnosis
+                 
+The core idea of Packet Analysis Pipeline is: 
+Packet → Protocol Event → Network Meaning → Possible Diagnosis
 
 ### TCP Connection Analysis
-Client                         Server
-  │                              │
-  │ -------- SYN --------------> │
-  │                              │
-  │ <------ SYN + ACK ---------- │
-  │                              │
-  │ -------- ACK --------------> │
-  │                              │
-  │       Connection Ready       │
+```text
+        CLIENT                              SERVER
+          │                                   │
+          │                                   │
+          │──────────── SYN ─────────────────>│
+          │      "I want to connect"          │
+          │                                   │
+          │<──────── SYN + ACK ───────────────│
+          │      "Connection accepted"       │
+          │                                   │
+          │──────────── ACK ─────────────────>│
+          │      "Connection established"     │
+          │                                   │
+          │                                   │
+          │════════ TCP CONNECTION ═══════════│
+          │                                   │
+          │<────────── Data Transfer ────────>│
+          │                                   │
