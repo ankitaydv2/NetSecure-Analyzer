@@ -139,25 +139,39 @@ Investigate packet loss, congestion, or network path issues.
                  Final Report
 
 
-###  Packet Analysis Pipeline               
-PCAP/PCAPNG
-     ↓
-Read Packets
-     ↓
-Identify Protocol Layers
-     ↓
-Extract TCP/UDP Information
-     ↓
-Analyze TCP Flags
-     ↓
-Detect Possible Retransmissions
-     ↓
-Inspect TLS Handshake
-     ↓
-Generate Statistics
-     ↓
-Generate Diagnostic Hints
+###  Packet Analysis Pipeline 
 
+PCAP / PCAPNG
+      │
+      ▼
+Read Packets
+      │
+      ▼
+Identify Protocol Layers
+      │
+      ├───────────────┐
+      ▼               ▼
+ TCP Analysis     UDP Analysis
+      │
+      ▼
+TCP Flags & Events
+      │
+      ▼
+Possible Retransmissions
+      │
+      ▼
+TLS Handshake Analysis
+      │
+      ▼
+Generate Statistics
+      │
+      ▼
+Rule-Based Diagnosis
+      │
+      ▼
+Final Analysis Report
+
+The core idea is: Packet → Protocol Event → Network Meaning → Possible Diagnosis
 
 ### TCP Connection Analysis
 Client                         Server
